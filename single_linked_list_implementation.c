@@ -4,15 +4,12 @@
 
 void append();
 void traverse();
+void printLength();
 
-// prepend();
-// add();
-// deleteFirst()
+// addBefore();
+// addAfter();
 // delete();
-// getLength();
-// reverse();
-// swap();
-// sort();
+
 
 struct Item {
     int value;
@@ -58,6 +55,22 @@ void traverse() {
     return;
 }
 
+void printLength() {
+    printf("\n");
+    unsigned int length = 0;
+
+    if (root != NULL) {
+        struct Item* temp = root;
+        do {
+            length += 1;
+            temp = temp->link;
+        } while (temp != NULL);
+    }
+
+    printf("Number of items in the list: %i\n", length);
+    return;
+}
+
 
 int main(void) {
     int choice;
@@ -66,7 +79,8 @@ int main(void) {
         printf("\n");
         printf("1. Append item\n");
         printf("2. Display all items\n");
-        printf("3. Quit\n");
+        printf("3. Display length\n");
+        printf("4. Quit\n");
         printf("\n");
         printf("~~~~~~~~~~~~~~~~~~~\n");
 
@@ -81,6 +95,9 @@ int main(void) {
                 traverse();
                 break;
             case 3:
+                printLength();
+                break;
+            case 4:
                 exit(1);
             default:
                 printf("Invalid input\n");
