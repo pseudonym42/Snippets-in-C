@@ -4,12 +4,8 @@
 
 void append();
 void traverse();
-void printLength();
-
-// addBefore();
-// addAfter();
-// delete();
-
+int getLength();
+void deleteItemByIndex();
 
 struct Item {
     int value;
@@ -55,7 +51,49 @@ void traverse() {
     return;
 }
 
-void printLength() {
+void deleteItemByIndex() {
+    printf("\n");
+    if (root == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+
+    unsigned int itemIndex;
+    unsigned int len = (unsigned int) getLength();
+    printf("Type index number of the item that needs to be deleted\n");
+    scanf("%d", &itemIndex);
+    printf("\n");
+
+    if ((len - 1) < itemIndex || itemIndex < 0) {
+        printf("The index of the item you'd like to remove should be a positive number more than zero and less than %u\n", len);
+        return;
+    }
+
+    struct Item* temp = root;
+    if (itemIndex == 0) {
+        root = temp->link;
+        temp->link = NULL;
+        free(temp);
+        return;
+    }
+
+    unsigned int i = 1;
+    struct Item* itemToDelete;
+
+    while (i < itemIndex) {
+        temp = temp->link;
+        i++;
+    }
+    itemToDelete = temp->link;
+
+    temp->link = itemToDelete->link;
+    itemToDelete->link = NULL;
+    free(itemToDelete);
+    printf("Deletion is successfull\n");
+    return;
+}
+
+int getLength() {
     printf("\n");
     unsigned int length = 0;
 
@@ -68,7 +106,7 @@ void printLength() {
     }
 
     printf("Number of items in the list: %i\n", length);
-    return;
+    return length;
 }
 
 
@@ -80,7 +118,8 @@ int main(void) {
         printf("1. Append item\n");
         printf("2. Display all items\n");
         printf("3. Display length\n");
-        printf("4. Quit\n");
+        printf("4. Delete item by index\n");
+        printf("5. Quit\n");
         printf("\n");
         printf("~~~~~~~~~~~~~~~~~~~\n");
 
@@ -95,9 +134,12 @@ int main(void) {
                 traverse();
                 break;
             case 3:
-                printLength();
+                getLength();
                 break;
             case 4:
+                deleteItemByIndex();
+                break;
+            case 5:
                 exit(1);
             default:
                 printf("Invalid input\n");
