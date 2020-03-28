@@ -1,3 +1,12 @@
+/*
+    Program to reverse in place an array of fixed sizeof
+
+    Array elements are to be submitted by a user
+
+    For example: If the user enters 1, 2, 3, the output of the program
+    will print to the standard output: 3, 2, 1
+*/
+
 #include <stdio.h>
 
 void reverseArray(int* arr, int len) {
@@ -12,8 +21,9 @@ void reverseArray(int* arr, int len) {
 
 int main(void) {
     int array[6] = {0};
-    size_t arrayLength = sizeof(array)/sizeof(int);
+    int arrayLength = (int)(sizeof(array)/sizeof(int));
 
+    printf("Please insert 6 elements below: \n\n");
     for(int i = 0; i < arrayLength; i++) {
         scanf("%d", &array[i]);
     }
